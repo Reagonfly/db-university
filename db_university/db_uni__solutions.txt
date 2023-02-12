@@ -1,0 +1,49 @@
+After Create new db i dragged the shared file onto the tab for impotr it, then in the SQL tab
+i simply digit the following commands, as reported also on shared slides:
+
+-Solution for Problem 1
+
+	SELECT *
+	FROM `students`
+	WHERE YEAR(`date_of_birth`) = 1990;
+
+-Solution for Problem 2
+
+	SELECT *
+	FROM `courses`
+	WHERE `cfu` > 10;
+
+-Solution for Problem 3
+
+	SELECT *
+	FROM `students`
+	WHERE `date_of_birth` < '1993/01/10';
+
+-Solution for Problem 4
+
+	SELECT *
+	FROM `courses`
+	WHERE `period` = 'I semestre' AND `year` = 1;
+
+-Solution for Problem 5
+
+	SELECT *
+	FROM `exams`
+	WHERE `hour` > '14:00:00' AND `date` = '2020-06-20';
+
+-Solution for Problem 6
+
+	SELECT *
+	FROM `degrees`
+	WHERE `level` = 'magistrale';
+
+-Solution for Problem 7
+
+	SELECT COUNT(*) `departments`
+	FROM `departments`;
+
+-Solution for Problem 8
+
+	SELECT *
+	FROM `teachers`
+	WHERE `phone` IS NULL;
