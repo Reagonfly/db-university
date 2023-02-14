@@ -1,0 +1,25 @@
+We repeat the previous exercise with GROUP key:
+
+-Solution for Problem 1
+
+	SELECT COUNT(*) AS subs_num,YEAR(`students`.`enrolment_date`) AS year
+	FROM `students`
+	GROUP BY `year`;
+
+-Solution for Problem 2
+
+	SELECT COUNT(*) AS teacher_num,`teachers`.`office_address` AS street_office
+	FROM `teachers`
+	GROUP BY `teachers`.`office_address`;
+
+-Solution for Problem 3
+
+	SELECT AVG(`vote`) AS medium_vote, `exam_id`
+	FROM `exam_student`
+	GROUP BY `exam_id`;
+
+-Solution for Problem 4
+
+	SELECT COUNT(*) AS number_department_courses, `department_id`
+	FROM `degrees`
+	GROUP BY `department_id`;

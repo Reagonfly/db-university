@@ -1,0 +1,64 @@
+We repeat the previous exercise with JOIN key:
+
+-Solution for Problem 1
+
+	SELECT `students`.*, `degrees`.`name` as degree_course
+	FROM `students`
+	INNER JOIN `degrees`
+	ON `students`.`degree_id`= `degrees`.`id`
+	WHERE `degrees`.`name` LIKE "%Corso di Laurea in Economia%";
+
+-Solution for Problem 2
+
+	SELECT `degrees`.*,`departments`.`name`
+	FROM `degrees`
+	INNER JOIN `departments`
+	ON `degrees`.`department_id` =  `departments`.`id`
+	WHERE `degrees`.`level` LIKE "%Magistrale%" 
+	AND `departments`.`name`LIKE "%Dipartimento di Neuroscienze%";
+
+-Solution for Problem 3
+
+	SELECT `teachers`.*, `courses`.`name`
+	FROM `teachers`
+	JOIN `course_teacher` ON `course_teacher`.`teacher_id` = `teachers`.`id`
+	JOIN `courses` ON `courses`.`id` = `course_teacher`.`course_id`
+	JOIN `degrees` ON `degrees`.`id` = `courses`.`degree_id`
+	WHERE `course_teacher`.`teacher_id` = 44;
+
+-Solution for Problem 4
+
+	SELECT `students`.*, `degrees`.*, `departments`.*
+	FROM `students`
+	JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
+	JOIN `departments` ON `degrees`.`department_id` = `departments`.`id`
+	ORDER BY `students`.`surname`, `students`.`name`;
+
+-Solution for Problem 5
+
+	SELECT `degrees`.`name` AS degree_course, `teachers`.`name` AS teacher_name, `teachers`.`surname` AS teachers_surname,`courses`.`name` AS course_name
+	FROM `teachers`
+	JOIN `course_teacher` ON `course_teacher`.`teacher_id` = `teachers`.`id`
+	JOIN `courses` ON `courses`.`id` = `course_teacher`.`course_id`
+	JOIN `degrees` ON `degrees`.`id` = `courses`.`degree_id`;
+
+-Solution for Problem 6
+
+	SELECT DISTINCT `teachers`.`name` AS teacher_name,`teachers`.`surname` AS teacher_surname, `departments`.`name` AS department_name
+	FROM `teachers`
+	JOIN `course_teacher` ON `course_teacher`.`teacher_id`=`teachers`.`id`
+	JOIN `courses` ON `courses`.`id`=`course_teacher`.`course_id`
+	JOIN `degrees` ON `degrees`.`id`= `courses`.`degree_id`
+	JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
+	WHERE `departments`.`name` LIKE '%Dipartimento di Matematica%';
+
+-Solution for Problem 7 (bonus)
+
+	SELECT COUNT(`exam_student`.`vote`) as `exam_tries`, `courses`.`name` as course_name,`students`.`surname` as students_surname, `students`.`name` as students_name
+	FROM `exam_student`
+	JOIN `students` ON `students`.`id` = `exam_student`.`student_id`
+	JOIN `exams` ON `exams`.`id` = `exam_student`.`exam_id`
+	JOIN `courses` ON `courses`.`id` = `exams`.`course_id`
+	WHERE `exam_student`.`vote` < 18
+	GROUP BY `exams`.`course_id`,`course_name`,`students_surname`, `students_name`  
+	ORDER BY `students_name`, `students_surname` ASC;
